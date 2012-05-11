@@ -35,7 +35,8 @@ public class BoardController implements MouseListener {
 		if (board.cellIsNotEmpty(cell)) {
 			return;
 		}
-		board.setMarkInCell(gameManager.getCurrentPlayerMark(), getCellAt(e.getPoint()));
+		board.setMarkInCell(gameManager.getCurrentPlayerMark(), cell);
+		board.checkWin();
 	}
 
 	private Cell getCellAt(Point point) {

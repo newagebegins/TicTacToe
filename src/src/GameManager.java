@@ -17,7 +17,9 @@ public class GameManager implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		switchCurrentPlayer();
+		if (o instanceof Board) {
+			switchCurrentPlayer();
+		}
 	}
 
 	private void switchCurrentPlayer() {
