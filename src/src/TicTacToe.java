@@ -1,6 +1,7 @@
+package src;
 import java.applet.Applet;
 
 @SuppressWarnings("serial")
-public class GameApplet extends Applet {
+public class TicTacToe extends Applet {
 
 }
