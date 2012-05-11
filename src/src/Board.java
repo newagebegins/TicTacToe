@@ -1,6 +1,8 @@
 package src;
 
-public class Board {
+import java.util.Observable;
+
+public class Board extends Observable {
 	
 	public static final int BOARD_SIZE = 3;
 	
@@ -10,16 +12,29 @@ public class Board {
 		initCells();
 	}
 	
+	public void setMarkInCell(Mark mark, Cell cell) {
+		setMarkInCell(cell.getRow(), cell.getCol(), mark);
+	}
+	
+	public void setMarkInCell(int row, int col, Mark mark) {
+		if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) {
+			return;
+		}
+		cells[row][col] = mark;
+		setChanged();
+		notifyObservers();
+	}
+	
 	public void setXMarkInCell(int row, int col) {
-		setMark(row, col, Mark.X);
+		setMarkInCell(row, col, Mark.X);
 	}
 	
 	public void setOMarkInCell(int row, int col) {
-		setMark(row, col, Mark.O);
+		setMarkInCell(row, col, Mark.O);
 	}
 	
 	public void removeMarkInCell(int row, int col) {
-		setMark(row, col, Mark.Empty);
+		setMarkInCell(row, col, Mark.Empty);
 	}
 	
 	public Mark getMarkInCell(int row, int col) {
@@ -36,10 +51,6 @@ public class Board {
 				removeMarkInCell(row, col);
 			}
 		}
-	}
-	
-	private void setMark(int row, int col, Mark mark) {
-		cells[row][col] = mark;
 	}
 
 }

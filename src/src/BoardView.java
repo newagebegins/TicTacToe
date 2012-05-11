@@ -1,13 +1,15 @@
 package src;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class BoardView {
 	
-	private static final int BOARD_X_PX = 10;
-	private static final int BOARD_Y_PX = 10;
-	private static final int BOARD_SIZE_PX = 90;
-	private static final int CELL_SIZE_PX = BOARD_SIZE_PX / Board.BOARD_SIZE;
+	public static final int BOARD_X_PX = 50;
+	public static final int BOARD_Y_PX = 50;
+	public static final int BOARD_SIZE_PX = 90;
+	public static final int CELL_SIZE_PX = BOARD_SIZE_PX / Board.BOARD_SIZE;
+	public static final Rectangle BOARD_RECT = new Rectangle(BOARD_X_PX, BOARD_Y_PX, BOARD_SIZE_PX, BOARD_SIZE_PX);
 	
 	private Board board = new NullBoard();
 	
