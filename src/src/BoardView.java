@@ -4,10 +4,10 @@ import java.awt.Graphics;
 
 public class BoardView {
 	
-	private static final int BOARD_X = 10;
-	private static final int BOARD_Y = 10;
-	private static final int BOARD_SIZE = 90;
-	private static final int CELL_SIZE = BOARD_SIZE / Board.BOARD_SIZE;
+	private static final int BOARD_X_PX = 10;
+	private static final int BOARD_Y_PX = 10;
+	private static final int BOARD_SIZE_PX = 90;
+	private static final int CELL_SIZE_PX = BOARD_SIZE_PX / Board.BOARD_SIZE;
 	
 	private Board board = new NullBoard();
 	
@@ -21,11 +21,11 @@ public class BoardView {
 	}
 	
 	private void paintBoard(Graphics g) {
-		g.drawRect(BOARD_X, BOARD_Y, BOARD_SIZE, BOARD_SIZE);
-		g.drawLine(BOARD_X, BOARD_Y + CELL_SIZE, BOARD_X + BOARD_SIZE, BOARD_Y + CELL_SIZE);
-		g.drawLine(BOARD_X, BOARD_Y + CELL_SIZE*2, BOARD_X + BOARD_SIZE, BOARD_Y + CELL_SIZE*2);
-		g.drawLine(BOARD_X + CELL_SIZE, BOARD_Y, BOARD_X + CELL_SIZE, BOARD_Y + BOARD_SIZE);
-		g.drawLine(BOARD_X + CELL_SIZE*2, BOARD_Y, BOARD_X + CELL_SIZE*2, BOARD_Y + BOARD_SIZE);
+		g.drawRect(BOARD_X_PX, BOARD_Y_PX, BOARD_SIZE_PX, BOARD_SIZE_PX);
+		g.drawLine(BOARD_X_PX, BOARD_Y_PX + CELL_SIZE_PX, BOARD_X_PX + BOARD_SIZE_PX, BOARD_Y_PX + CELL_SIZE_PX);
+		g.drawLine(BOARD_X_PX, BOARD_Y_PX + CELL_SIZE_PX*2, BOARD_X_PX + BOARD_SIZE_PX, BOARD_Y_PX + CELL_SIZE_PX*2);
+		g.drawLine(BOARD_X_PX + CELL_SIZE_PX, BOARD_Y_PX, BOARD_X_PX + CELL_SIZE_PX, BOARD_Y_PX + BOARD_SIZE_PX);
+		g.drawLine(BOARD_X_PX + CELL_SIZE_PX*2, BOARD_Y_PX, BOARD_X_PX + CELL_SIZE_PX*2, BOARD_Y_PX + BOARD_SIZE_PX);
 	}
 	
 	private void paintMarks(Graphics g) {
@@ -41,8 +41,8 @@ public class BoardView {
 	private void paintMarkInCell(Graphics g, int row, int col) {
 		Mark mark = board.getMarkInCell(row, col);
 		String markString = mark == Mark.X ? "X" : "O";
-		int x = BOARD_X + 11 + col * CELL_SIZE;
-		int y = BOARD_Y + 20 + row * CELL_SIZE;
+		int x = BOARD_X_PX + 11 + col * CELL_SIZE_PX;
+		int y = BOARD_Y_PX + 20 + row * CELL_SIZE_PX;
 		g.drawString(markString, x, y);
 	}
 
