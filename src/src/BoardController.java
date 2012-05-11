@@ -31,6 +31,10 @@ public class BoardController implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		Cell cell = getCellAt(e.getPoint());
+		if (board.cellIsNotEmpty(cell)) {
+			return;
+		}
 		board.setMarkInCell(gameManager.getCurrentPlayerMark(), getCellAt(e.getPoint()));
 	}
 

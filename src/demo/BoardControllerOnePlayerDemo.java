@@ -8,7 +8,7 @@ import java.util.Observer;
 import src.*;
 
 @SuppressWarnings("serial")
-public class BoardControllerDemo extends Applet implements Observer {
+public class BoardControllerOnePlayerDemo extends Applet implements Observer {
 	
 	Board board;
 	BoardView boardView;

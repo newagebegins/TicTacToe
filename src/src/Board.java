@@ -41,6 +41,10 @@ public class Board extends Observable {
 		return cells[row][col];
 	}
 	
+	public boolean cellIsNotEmpty(Cell cell) {
+		return cellIsNotEmpty(cell.getRow(), cell.getCol());
+	}
+	
 	public boolean cellIsNotEmpty(int row, int col) {
 		return getMarkInCell(row, col) != Mark.Empty;
 	}
