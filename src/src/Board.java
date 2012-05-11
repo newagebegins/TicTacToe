@@ -8,6 +8,7 @@ public class Board extends Observable {
 	
 	private Mark[][] cells = new Mark[BOARD_SIZE][BOARD_SIZE];
 	private boolean win = false;
+	private Cell[] winCells = new Cell[BOARD_SIZE];
 	
 	public Board() {
 		initCells();
@@ -99,11 +100,15 @@ public class Board extends Observable {
 		if (firstMark == Mark.Empty) {
 			return false;
 		}
+		Cell[] winCells = new Cell[BOARD_SIZE];
+		winCells[0] = new Cell(row, 0);
 		for (int col = 1; col < BOARD_SIZE; ++col) {
 			if (cells[row][col] != firstMark) {
 				return false;
 			}
+			winCells[col] = new Cell(row, col);
 		}
+		this.winCells = winCells;
 		return true;
 	}
 	
@@ -112,11 +117,15 @@ public class Board extends Observable {
 		if (firstMark == Mark.Empty) {
 			return false;
 		}
+		Cell[] winCells = new Cell[BOARD_SIZE];
+		winCells[0] = new Cell(0, col);
 		for (int row = 1; row < BOARD_SIZE; ++row) {
 			if (cells[row][col] != firstMark) {
 				return false;
 			}
+			winCells[row] = new Cell(row, col);
 		}
+		this.winCells = winCells;
 		return true;
 	}
 	
@@ -125,11 +134,15 @@ public class Board extends Observable {
 		if (firstMark == Mark.Empty) {
 			return false;
 		}
+		Cell[] winCells = new Cell[BOARD_SIZE];
+		winCells[0] = new Cell(0, 0);
 		for (int i = 1; i < BOARD_SIZE; ++i) {
 			if (cells[i][i] != firstMark) {
 				return false;
 			}
+			winCells[i] = new Cell(i, i);
 		}
+		this.winCells = winCells;
 		return true;
 	}
 	
@@ -138,12 +151,20 @@ public class Board extends Observable {
 		if (firstMark == Mark.Empty) {
 			return false;
 		}
+		Cell[] winCells = new Cell[BOARD_SIZE];
+		winCells[0] = new Cell(0, BOARD_SIZE - 1);
 		for (int row = 1, col = BOARD_SIZE - 2; col >= 0; ++row, --col) {
 			if (cells[row][col] != firstMark) {
 				return false;
 			}
+			winCells[row] = new Cell(row, col);
 		}
+		this.winCells = winCells;
 		return true;
+	}
+
+	public Cell[] getWinCells() {
+		return winCells;
 	}
 
 }

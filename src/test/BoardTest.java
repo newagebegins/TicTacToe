@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import src.Board;
+import src.Cell;
 import src.Mark;
 
 public class BoardTest {
@@ -127,6 +128,46 @@ public class BoardTest {
 		board.setMarkInCell(2, 0, Mark.X);
 		board.checkWin();
 		assertTrue(board.isWin());
+	}
+	
+	@Test
+	public void getWinCells_Horizontal() {
+		board.setMarkInCell(0, 0, Mark.X);
+		board.setMarkInCell(0, 1, Mark.X);
+		board.setMarkInCell(0, 2, Mark.X);
+		board.checkWin();
+		Cell[] expected = new Cell[] { new Cell(0, 0), new Cell(0, 1), new Cell(0, 2) };
+		assertArrayEquals(expected, board.getWinCells());
+	}
+	
+	@Test
+	public void getWinCells_Vertical() {
+		board.setMarkInCell(0, 0, Mark.X);
+		board.setMarkInCell(1, 0, Mark.X);
+		board.setMarkInCell(2, 0, Mark.X);
+		board.checkWin();
+		Cell[] expected = new Cell[] { new Cell(0, 0), new Cell(1, 0), new Cell(2, 0) };
+		assertArrayEquals(expected, board.getWinCells());
+	}
+	
+	@Test
+	public void getWinCells_DiagonalOne() {
+		board.setMarkInCell(0, 0, Mark.X);
+		board.setMarkInCell(1, 1, Mark.X);
+		board.setMarkInCell(2, 2, Mark.X);
+		board.checkWin();
+		Cell[] expected = new Cell[] { new Cell(0, 0), new Cell(1, 1), new Cell(2, 2) };
+		assertArrayEquals(expected, board.getWinCells());
+	}
+	
+	@Test
+	public void getWinCells_DiagonalTwo() {
+		board.setMarkInCell(0, 2, Mark.X);
+		board.setMarkInCell(1, 1, Mark.X);
+		board.setMarkInCell(2, 0, Mark.X);
+		board.checkWin();
+		Cell[] expected = new Cell[] { new Cell(0, 2), new Cell(1, 1), new Cell(2, 0) };
+		assertArrayEquals(expected, board.getWinCells());
 	}
 
 }

@@ -16,6 +16,9 @@ public class BoardView {
 	public void paint(Graphics g) {
 		paintBoard(g);
 		paintMarks(g);
+		if (board.isWin()) {
+			crossOutWinCells(g);
+		}
 	}
 
 	public void setBoard(Board board) {
@@ -46,6 +49,20 @@ public class BoardView {
 		int x = BOARD_X_PX + 11 + col * CELL_SIZE_PX;
 		int y = BOARD_Y_PX + 20 + row * CELL_SIZE_PX;
 		g.drawString(markString, x, y);
+	}
+	
+	private void crossOutWinCells(Graphics g) {
+		int[] winX = new int[Board.BOARD_SIZE];
+		int[] winY = new int[Board.BOARD_SIZE];
+		
+		Cell[] winCells = board.getWinCells();
+		
+		for (int i = 0; i < winCells.length; ++i) {
+			winX[i] = BOARD_X_PX + winCells[i].getCol() * CELL_SIZE_PX + 15;
+			winY[i] = BOARD_Y_PX + winCells[i].getRow() * CELL_SIZE_PX + 15;
+		}
+		
+		g.drawPolyline(winX, winY, Board.BOARD_SIZE);
 	}
 
 }

@@ -17,5 +17,14 @@ public class Cell {
 	public int getCol() {
 		return col;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Cell)) {
+			return false;
+		}
+		Cell other = (Cell) obj;
+		return this.row == other.row && this.col == other.col;
+	}
 	
 }
