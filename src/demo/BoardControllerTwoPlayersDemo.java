@@ -30,6 +30,7 @@ public class BoardControllerTwoPlayersDemo extends Applet implements Observer {
 		
 		boardView = new BoardView();
 		boardView.setBoard(board);
+		boardController.setBoardView(boardView);
 		
 		addMouseListener(boardController);
 	}

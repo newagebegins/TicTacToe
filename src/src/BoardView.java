@@ -5,13 +5,12 @@ import java.awt.Rectangle;
 
 public class BoardView {
 	
-	public static final int BOARD_X_PX = 50;
-	public static final int BOARD_Y_PX = 50;
 	public static final int BOARD_SIZE_PX = 90;
 	public static final int CELL_SIZE_PX = BOARD_SIZE_PX / Board.BOARD_SIZE;
-	public static final Rectangle BOARD_RECT = new Rectangle(BOARD_X_PX, BOARD_Y_PX, BOARD_SIZE_PX, BOARD_SIZE_PX);
 	
 	private Board board = new NullBoard();
+	private int x = 0;
+	private int y = 0;
 	
 	public void paint(Graphics g) {
 		paintBoard(g);
@@ -20,17 +19,21 @@ public class BoardView {
 			crossOutWinCells(g);
 		}
 	}
+	
+	public Rectangle getRect() {
+		return new Rectangle(x, y, BOARD_SIZE_PX, BOARD_SIZE_PX);
+	}
 
 	public void setBoard(Board board) {
 		this.board = board;
 	}
 	
 	private void paintBoard(Graphics g) {
-		g.drawRect(BOARD_X_PX, BOARD_Y_PX, BOARD_SIZE_PX, BOARD_SIZE_PX);
-		g.drawLine(BOARD_X_PX, BOARD_Y_PX + CELL_SIZE_PX, BOARD_X_PX + BOARD_SIZE_PX, BOARD_Y_PX + CELL_SIZE_PX);
-		g.drawLine(BOARD_X_PX, BOARD_Y_PX + CELL_SIZE_PX*2, BOARD_X_PX + BOARD_SIZE_PX, BOARD_Y_PX + CELL_SIZE_PX*2);
-		g.drawLine(BOARD_X_PX + CELL_SIZE_PX, BOARD_Y_PX, BOARD_X_PX + CELL_SIZE_PX, BOARD_Y_PX + BOARD_SIZE_PX);
-		g.drawLine(BOARD_X_PX + CELL_SIZE_PX*2, BOARD_Y_PX, BOARD_X_PX + CELL_SIZE_PX*2, BOARD_Y_PX + BOARD_SIZE_PX);
+		g.drawRect(x, y, BOARD_SIZE_PX, BOARD_SIZE_PX);
+		g.drawLine(x, y + CELL_SIZE_PX, x + BOARD_SIZE_PX, y + CELL_SIZE_PX);
+		g.drawLine(x, y + CELL_SIZE_PX*2, x + BOARD_SIZE_PX, y + CELL_SIZE_PX*2);
+		g.drawLine(x + CELL_SIZE_PX, y, x + CELL_SIZE_PX, y + BOARD_SIZE_PX);
+		g.drawLine(x + CELL_SIZE_PX*2, y, x + CELL_SIZE_PX*2, y + BOARD_SIZE_PX);
 	}
 	
 	private void paintMarks(Graphics g) {
@@ -46,8 +49,8 @@ public class BoardView {
 	private void paintMarkInCell(Graphics g, int row, int col) {
 		Mark mark = board.getMarkInCell(row, col);
 		String markString = mark == Mark.X ? "X" : "O";
-		int x = BOARD_X_PX + 11 + col * CELL_SIZE_PX;
-		int y = BOARD_Y_PX + 20 + row * CELL_SIZE_PX;
+		int x = this.x + 11 + col * CELL_SIZE_PX;
+		int y = this.y + 20 + row * CELL_SIZE_PX;
 		g.drawString(markString, x, y);
 	}
 	
@@ -58,11 +61,24 @@ public class BoardView {
 		Cell[] winCells = board.getWinCells();
 		
 		for (int i = 0; i < winCells.length; ++i) {
-			winX[i] = BOARD_X_PX + winCells[i].getCol() * CELL_SIZE_PX + 15;
-			winY[i] = BOARD_Y_PX + winCells[i].getRow() * CELL_SIZE_PX + 15;
+			winX[i] = x + winCells[i].getCol() * CELL_SIZE_PX + 15;
+			winY[i] = y + winCells[i].getRow() * CELL_SIZE_PX + 15;
 		}
 		
 		g.drawPolyline(winX, winY, Board.BOARD_SIZE);
+	}
+
+	public void setXY(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getX() {
+		return x;
 	}
 
 }

@@ -8,9 +8,14 @@ public class BoardController implements MouseListener {
 
 	private Board board;
 	private GameManager gameManager;
+	private BoardView boardView;
 
 	public void setBoard(Board board) {
 		this.board = board;
+	}
+	
+	public void setBoardView(BoardView boardView) {
+		this.boardView = boardView;
 	}
 
 	public void setGameManager(GameManager gameManager) {
@@ -40,12 +45,12 @@ public class BoardController implements MouseListener {
 	}
 
 	private Cell getCellAt(Point point) {
-		if (!BoardView.BOARD_RECT.contains(point)) {
+		if (!boardView.getRect().contains(point)) {
 			return new NullCell();
 		}
 		
-		int row = (point.y - BoardView.BOARD_Y_PX) / BoardView.CELL_SIZE_PX;
-		int col = (point.x - BoardView.BOARD_X_PX) / BoardView.CELL_SIZE_PX;
+		int row = (point.y - boardView.getY()) / BoardView.CELL_SIZE_PX;
+		int col = (point.x - boardView.getX()) / BoardView.CELL_SIZE_PX;
 		
 		return new Cell(row, col);
 	}
