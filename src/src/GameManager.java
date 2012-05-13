@@ -7,10 +7,15 @@ public class GameManager implements Observer {
 	
 	private Mark currentPlayerMark;
 	private Board board;
+	private AI ai;
 
 	public GameManager(Board board) {
 		this.board = board;
 		initGame();
+	}
+	
+	public void setAI(AI ai) {
+		this.ai = ai;
 	}
 
 	public void setCurrentPlayerMark(Mark currentPlayerMark) {
@@ -24,6 +29,8 @@ public class GameManager implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Board) {
+			switchCurrentPlayer();
+			board.setMarkInCell(getCurrentPlayerMark(), ai.getMoveCell());
 			switchCurrentPlayer();
 		}
 	}

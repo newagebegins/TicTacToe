@@ -12,6 +12,14 @@ public class MarkTest {
 	public void testToString() {
 		assertEquals("X", Mark.X.toString());
 		assertEquals("O", Mark.O.toString());
+		assertEquals(".", Mark.Empty.toString());
+	}
+	
+	@Test
+	public void createMarkFromChar() {
+		assertEquals(Mark.X, Mark.createMarkFromString("X"));
+		assertEquals(Mark.O, Mark.createMarkFromString("O"));
+		assertEquals(Mark.Empty, Mark.createMarkFromString("."));
 	}
 
 }

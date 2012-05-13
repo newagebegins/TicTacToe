@@ -27,4 +27,9 @@ public class Cell {
 		return this.row == other.row && this.col == other.col;
 	}
 	
+	@Override
+	public String toString() {
+		return "" + row + "," + col;
+	}
+	
 }

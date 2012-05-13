@@ -6,16 +6,33 @@ public class Board extends Observable {
 	
 	public static final int BOARD_SIZE = 3;
 	
-	private Mark[][] cells;
+	private Mark[][] cells = new Mark[BOARD_SIZE][BOARD_SIZE];
 	private boolean win;
 	private Cell[] winCells;
 	private Mark winnerMark;
 	
 	public Board() {
-		cells = new Mark[BOARD_SIZE][BOARD_SIZE];
 		reset();
 	}
 	
+	public Board(String boardStr) {
+		reset();
+		
+		for (int c = 0, row = 0, col = 0; c < boardStr.length(); ++c) {
+			if (boardStr.charAt(c) == '\n') {
+				++row;
+				col = 0;
+				continue;
+			}
+			setMarkStrInCell("" + boardStr.charAt(c), new Cell(row, col));
+			++col;
+		}
+	}
+
+	public void setMarkStrInCell(String markStr, Cell cell) {
+		setMarkInCell(Mark.createMarkFromString(markStr), cell);
+	}
+
 	public void setMarkInCell(Mark mark, Cell cell) {
 		setMarkInCell(cell.getRow(), cell.getCol(), mark);
 	}
@@ -147,6 +164,34 @@ public class Board extends Observable {
 			}
 		}
 		return true;
+	}
+	
+	public Mark[] getRow(int row) {
+		return cells[row];
+	}
+
+	public Mark[] getCol(int col) {
+		Mark[] result = new Mark[BOARD_SIZE];
+		for (int row = 0; row < BOARD_SIZE; ++row) {
+			result[row] = getMarkInCell(row, col);
+		}
+		return result;
+	}
+
+	public Mark[] getDiagonalOne() {
+		Mark[] result = new Mark[BOARD_SIZE];
+		for (int i = 0; i < BOARD_SIZE; ++i) {
+			result[i] = getMarkInCell(i, i);
+		}
+		return result;
+	}
+
+	public Mark[] getDiagonalTwo() {
+		Mark[] result = new Mark[BOARD_SIZE];
+		for (int row = 0, col = BOARD_SIZE - 1; col >= 0; ++row, --col) {
+			result[row] = getMarkInCell(row, col);
+		}
+		return result;
 	}
 
 }
