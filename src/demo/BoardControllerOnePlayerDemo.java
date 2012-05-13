@@ -14,13 +14,14 @@ public class BoardControllerOnePlayerDemo extends Applet implements Observer {
 	BoardView boardView;
 	BoardController boardController;
 	GameManager gameManager;
+	MouseController mouseController;
 
 	@Override
 	public void init() {
 		board = new Board();
 		board.addObserver(this);
 		
-		gameManager = new GameManager();
+		gameManager = new GameManager(board);
 		gameManager.setCurrentPlayerMark(Mark.X);
 		
 		boardController = new BoardController();
@@ -31,7 +32,8 @@ public class BoardControllerOnePlayerDemo extends Applet implements Observer {
 		boardView.setBoard(board);
 		boardController.setBoardView(boardView);
 		
-		addMouseListener(boardController);
+		mouseController = new MouseController(gameManager, boardController);
+		addMouseListener(mouseController);
 	}
 
 	@Override

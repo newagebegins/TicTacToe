@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class BoardController implements MouseListener {
+public class BoardController {
 
 	private Board board;
 	private GameManager gameManager;
@@ -22,19 +22,6 @@ public class BoardController implements MouseListener {
 		this.gameManager = gameManager;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
-	@Override
 	public void mousePressed(MouseEvent e) {
 		Cell cell = getCellAt(e.getPoint());
 		if (board.cellIsNotEmpty(cell)) {
@@ -53,10 +40,6 @@ public class BoardController implements MouseListener {
 		int col = (point.x - boardView.getX()) / BoardView.CELL_SIZE_PX;
 		
 		return new Cell(row, col);
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
 	}
 
 }

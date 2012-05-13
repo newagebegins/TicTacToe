@@ -6,6 +6,11 @@ import java.util.Observer;
 public class GameManager implements Observer {
 	
 	private Mark currentPlayerMark = Mark.Empty;
+	private Board board;
+
+	public GameManager(Board board) {
+		this.board = board;
+	}
 
 	public void setCurrentPlayerMark(Mark currentPlayerMark) {
 		this.currentPlayerMark = currentPlayerMark;
@@ -28,6 +33,10 @@ public class GameManager implements Observer {
 			newMark = Mark.X;
 		}
 		setCurrentPlayerMark(newMark);
+	}
+
+	public boolean isGameOver() {
+		return board.isWin();
 	}
 
 }
