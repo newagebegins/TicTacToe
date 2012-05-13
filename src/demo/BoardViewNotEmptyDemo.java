@@ -1,6 +1,7 @@
 package demo;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 
 import src.Board;
@@ -11,12 +12,13 @@ public class BoardViewNotEmptyDemo extends Applet {
 
 	@Override
 	public void paint(Graphics g) {
-		Board board = new Board();
+		setBackground(Color.black);
+		setSize(BoardView.BOARD_WIDTH, BoardView.BOARD_HEIGHT);
 		
-		board.setXMarkInCell(0, 0);
-		board.setOMarkInCell(0, 1);
-		board.setXMarkInCell(0, 2);
-		board.setOMarkInCell(1, 0);
+		Board board = new Board(
+				"XOX\n" +
+				"OXO\n" +
+				"XOX\n");
 		
 		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);

@@ -12,8 +12,9 @@ public class BoardViewEmptyDemo extends Applet {
 	@Override
 	public void paint(Graphics g) {
 		setBackground(Color.black);
-		BoardView boardView = new BoardView(this);
 		setSize(BoardView.BOARD_WIDTH, BoardView.BOARD_HEIGHT);
+		
+		BoardView boardView = new BoardView(this);
 		boardView.paint(g);
 	}
 

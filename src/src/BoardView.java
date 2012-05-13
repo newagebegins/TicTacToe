@@ -12,6 +12,8 @@ public class BoardView {
 	
 	private Applet applet;
 	private Image boardImg;
+	private Image xImg;
+	private Image oImg;
 	private Board board = new NullBoard();
 	private int x = 0;
 	private int y = 0;
@@ -19,6 +21,8 @@ public class BoardView {
 	public BoardView(Applet applet) {
 		this.applet = applet;
 		boardImg = applet.getImage(applet.getDocumentBase(), "images/board.png");
+		xImg = applet.getImage(applet.getDocumentBase(), "images/x.png");
+		oImg = applet.getImage(applet.getDocumentBase(), "images/o.png");
 	}
 	
 	public void paint(Graphics g) {
@@ -53,10 +57,10 @@ public class BoardView {
 
 	private void paintMarkInCell(Graphics g, int row, int col) {
 		Mark mark = board.getMarkInCell(row, col);
-		String markString = mark == Mark.X ? "X" : "O";
-		int x = this.x + 11 + col * CELL_WIDTH;
-		int y = this.y + 20 + row * CELL_HEIGHT;
-		g.drawString(markString, x, y);
+		Image img = mark == Mark.X ? xImg : oImg;
+		int x = this.x + 25 + col * CELL_WIDTH;
+		int y = this.y + 22 + row * CELL_HEIGHT;
+		g.drawImage(img, x, y, applet);
 	}
 	
 	private void crossOutWinCells(Graphics g) {
