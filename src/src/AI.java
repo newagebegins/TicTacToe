@@ -1,5 +1,8 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class AI {
 
 	private Board board;
@@ -26,9 +29,22 @@ public class AI {
 			return result;
 		}
 		
-		return null;
+		return randomCell();
 	}
 	
+	private Cell randomCell() {
+		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
+		for (int row = 0; row < Board.BOARD_SIZE; ++row) {
+			for (int col = 0; col < Board.BOARD_SIZE; ++col) {
+				if (board.getMarkInCell(row, col) == Mark.Empty) {
+					emptyCells.add(new Cell(row, col));
+				}
+			}
+		}
+		Random random = new Random();
+		return emptyCells.get(random.nextInt(emptyCells.size()));
+	}
+
 	private Mark getUserMark() {
 		return aiMark == Mark.X ? Mark.O : Mark.X;
 	}

@@ -106,6 +106,28 @@ public class AITest {
 					"X..\n", new Cell(1, 0));
 	}
 	
+	@Test
+	public void winningMovesHasHigherPriorityThanBlockingMoves() {
+		checkMove(	"X.O\n" +
+					"...\n" +
+					"X.O\n", new Cell(1, 2));
+	}
+	
+	@Test
+	public void randomMove() {
+		Board board = new Board(
+				"X.O\n" +
+				"...\n" +
+				"...\n");
+		AI ai = new AI();
+		ai.setBoard(board);
+		ai.setAIMark(Mark.O);
+		
+		assertTrue(ai.getMoveCell() != null);
+		assertFalse(ai.getMoveCell().equals(new Cell(0,0)));
+		assertFalse(ai.getMoveCell().equals(new Cell(0,2)));
+	}
+	
 	private void checkMove(String boardStr, Cell expectedMove) {
 		Board board = new Board(boardStr);
 		AI ai = new AI();
