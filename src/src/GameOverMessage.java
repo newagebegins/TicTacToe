@@ -2,7 +2,7 @@ package src;
 
 import java.awt.Graphics;
 
-public class GameOverMessage extends DisplayUnit {
+public class GameOverMessage {
 
 	private GameManager gameManager;
 	private int x;

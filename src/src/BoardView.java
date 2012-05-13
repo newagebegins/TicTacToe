@@ -3,7 +3,7 @@ package src;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class BoardView extends DisplayUnit {
+public class BoardView {
 	
 	public static final int BOARD_SIZE_PX = 90;
 	public static final int CELL_SIZE_PX = BOARD_SIZE_PX / Board.BOARD_SIZE;

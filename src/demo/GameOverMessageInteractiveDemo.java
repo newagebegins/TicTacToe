@@ -15,7 +15,6 @@ public class GameOverMessageInteractiveDemo extends Applet implements Observer {
 	private BoardController boardController;
 	private GameManager gameManager;
 	private MouseController mouseController;
-	private Painter painter;
 	private GameOverMessage gameOverMessage;
 
 	@Override
@@ -42,17 +41,14 @@ public class GameOverMessageInteractiveDemo extends Applet implements Observer {
 		gameOverMessage = new GameOverMessage(gameManager);
 		gameOverMessage.setXY(75, 30);
 		
-		painter = new Painter();
-		painter.addDisplayUnit(boardView);
-		painter.addDisplayUnit(gameOverMessage);
-		
 		mouseController = new MouseController(gameManager, boardController);
 		addMouseListener(mouseController);
 	}
 	
 	@Override
 	public void paint(Graphics g) {
-		painter.paint(g);
+		boardView.paint(g);
+		gameOverMessage.paint(g);
 	}
 
 	@Override
