@@ -58,22 +58,4 @@ public class GameManagerTest {
 		verify(boardMock, times(1)).reset();
 	}
 	
-	@Test
-	public void shouldMakeAIMoveAfterPlayerMadeHisMove() {
-		final Mark USER_MARK = Mark.X;
-		final Mark AI_MARK = Mark.O;
-		final Cell AI_MOVE_CELL = new Cell(0, 2);
-		Board boardMock = mock(Board.class);
-		GameManager gameManager = new GameManager(boardMock);
-		
-		AI aiMock = mock(AI.class);
-		when(aiMock.getMoveCell()).thenReturn(AI_MOVE_CELL);
-		gameManager.setAI(aiMock);
-		
-		gameManager.update(boardMock, null);
-		
-		verify(boardMock, times(1)).setMarkInCell(AI_MARK, AI_MOVE_CELL);
-		assertEquals(USER_MARK, gameManager.getCurrentPlayerMark());
-	}
-
 }

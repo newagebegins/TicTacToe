@@ -23,7 +23,6 @@ public class BoardControllerTwoPlayersDemo extends Applet implements Observer {
 		
 		gameManager = new GameManager(board);
 		gameManager.setCurrentPlayerMark(Mark.X);
-		board.addObserver(gameManager);
 		
 		boardController = new BoardController();
 		boardController.setBoard(board);

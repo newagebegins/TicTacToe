@@ -1,9 +1,6 @@
 package src;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class GameManager implements Observer {
+public class GameManager {
 	
 	private Mark currentPlayerMark;
 	private Board board;
@@ -24,15 +21,6 @@ public class GameManager implements Observer {
 
 	public Mark getCurrentPlayerMark() {
 		return currentPlayerMark;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		if (o instanceof Board) {
-			switchCurrentPlayer();
-			board.setMarkInCell(getCurrentPlayerMark(), ai.getMoveCell());
-			switchCurrentPlayer();
-		}
 	}
 
 	private void switchCurrentPlayer() {
@@ -58,6 +46,12 @@ public class GameManager implements Observer {
 	
 	private void initGame() {
 		currentPlayerMark = Mark.X;
+	}
+
+	public void makeAIMove() {
+		switchCurrentPlayer();
+		board.setMarkInCell(getCurrentPlayerMark(), ai.getMoveCell());
+		switchCurrentPlayer();
 	}
 
 }

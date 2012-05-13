@@ -19,11 +19,13 @@ public class AI {
 	public Cell getMoveCell() {
 		Cell result = null;
 		
+		// Winning move
 		result = getSpecialMoveCell(aiMark);
 		if (result != null) {
 			return result;
 		}
 		
+		// Blocking move
 		result = getSpecialMoveCell(getUserMark());
 		if (result != null) {
 			return result;

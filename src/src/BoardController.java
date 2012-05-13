@@ -28,6 +28,8 @@ public class BoardController {
 		}
 		board.setMarkInCell(gameManager.getCurrentPlayerMark(), cell);
 		board.checkWin();
+		gameManager.makeAIMove();
+		board.checkWin();
 	}
 
 	private Cell getCellAt(Point point) {

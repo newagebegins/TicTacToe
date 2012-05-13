@@ -13,6 +13,7 @@ public class TicTacToe extends Applet implements Observer {
 	private GameManager gameManager;
 	private MouseController mouseController;
 	private GameOverMessage gameOverMessage;
+	private AI ai;
 	
 	@Override
 	public void init() {
@@ -20,8 +21,13 @@ public class TicTacToe extends Applet implements Observer {
 		board.addObserver(this);
 		
 		gameManager = new GameManager(board);
+		
+		ai = new AI();
+		ai.setBoard(board);
+		gameManager.setAI(ai);
+		
 		gameManager.setCurrentPlayerMark(Mark.X);
-		board.addObserver(gameManager);
+		ai.setAIMark(Mark.O);
 		
 		boardController = new BoardController();
 		boardController.setBoard(board);
