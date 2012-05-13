@@ -6,13 +6,14 @@ public class Board extends Observable {
 	
 	public static final int BOARD_SIZE = 3;
 	
-	private Mark[][] cells = new Mark[BOARD_SIZE][BOARD_SIZE];
-	private boolean win = false;
-	private Cell[] winCells = new Cell[BOARD_SIZE];
-	private Mark winnerMark = Mark.Null;
+	private Mark[][] cells;
+	private boolean win;
+	private Cell[] winCells;
+	private Mark winnerMark;
 	
 	public Board() {
-		initCells();
+		cells = new Mark[BOARD_SIZE][BOARD_SIZE];
+		reset();
 	}
 	
 	public void setMarkInCell(Mark mark, Cell cell) {
@@ -128,6 +129,24 @@ public class Board extends Observable {
 
 	public Mark getWinnerMark() {
 		return winnerMark;
+	}
+
+	public void reset() {
+		win = false;
+		winCells = new Cell[BOARD_SIZE];
+		winnerMark = Mark.Null;
+		initCells();
+	}
+
+	public boolean isEmpty() {
+		for (int row = 0; row < BOARD_SIZE; ++row) {
+			for (int col = 0; col < BOARD_SIZE; ++col) {
+				if (getMarkInCell(row, col) != Mark.Empty) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }

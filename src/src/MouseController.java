@@ -27,7 +27,10 @@ public class MouseController  implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (!gameManager.isGameOver()) {
+		if (gameManager.isGameOver()) {
+			gameManager.resetGame();
+		}
+		else {
 			boardController.mousePressed(e);
 		}
 	}

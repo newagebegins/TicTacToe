@@ -38,5 +38,26 @@ public class GameManagerTest {
 		
 		assertEquals(WINNER_MARK, gameManager.getWinnerMark());
 	}
+	
+	@Test
+	public void resetGame_shouldResetCurrentPlayerMark() {
+		Board boardMock = mock(Board.class);
+		GameManager gameManager = new GameManager(boardMock);
+		gameManager.setCurrentPlayerMark(Mark.O);
+		
+		gameManager.resetGame();
+		
+		assertEquals(Mark.X, gameManager.getCurrentPlayerMark());
+	}
+	
+	@Test
+	public void resetGame_shouldResetBoard() {
+		Board boardMock = mock(Board.class);
+		GameManager gameManager = new GameManager(boardMock);
+		
+		gameManager.resetGame();
+		
+		verify(boardMock, times(1)).reset();
+	}
 
 }

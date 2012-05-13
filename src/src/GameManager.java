@@ -5,11 +5,12 @@ import java.util.Observer;
 
 public class GameManager implements Observer {
 	
-	private Mark currentPlayerMark = Mark.Empty;
+	private Mark currentPlayerMark;
 	private Board board;
 
 	public GameManager(Board board) {
 		this.board = board;
+		initGame();
 	}
 
 	public void setCurrentPlayerMark(Mark currentPlayerMark) {
@@ -41,6 +42,15 @@ public class GameManager implements Observer {
 
 	public Mark getWinnerMark() {
 		return board.getWinnerMark();
+	}
+
+	public void resetGame() {
+		initGame();
+		board.reset();
+	}
+	
+	private void initGame() {
+		currentPlayerMark = Mark.X;
 	}
 
 }

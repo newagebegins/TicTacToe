@@ -199,5 +199,32 @@ public class BoardTest {
 		board.checkWin();
 		assertEquals(Mark.Null, board.getWinnerMark());
 	}
+	
+	@Test
+	public void isEmpty_False() {
+		board.setMarkInCell(0, 0, Mark.X);
+		assertFalse(board.isEmpty());
+	}
+	
+	@Test
+	public void isEmpty_True() {
+		assertTrue(board.isEmpty());
+	}
+	
+	@Test
+	public void reset() {
+		final Mark WINNER_MARK = Mark.X;
+		board.setMarkInCell(0, 0, WINNER_MARK);
+		board.setMarkInCell(0, 1, WINNER_MARK);
+		board.setMarkInCell(0, 2, WINNER_MARK);
+		board.checkWin();
+		
+		board.reset();
+		
+		assertTrue(board.isEmpty());
+		assertFalse(board.isWin());
+		assertArrayEquals(new Cell[Board.BOARD_SIZE], board.getWinCells());
+		assertEquals(Mark.Null, board.getWinnerMark());
+	}
 
 }
