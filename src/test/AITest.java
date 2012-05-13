@@ -128,6 +128,20 @@ public class AITest {
 		assertFalse(ai.getMoveCell().equals(new Cell(0,2)));
 	}
 	
+	@Test
+	public void randomMove_Draw_ShouldReturnNullCell() {
+		Board board = new Board(
+				"XXO\n" +
+				"OXX\n" +
+				"XOO\n"
+		);
+		AI ai = new AI();
+		ai.setBoard(board);
+		ai.setAIMark(Mark.O);
+		
+		assertTrue(ai.getMoveCell() instanceof NullCell);
+	}
+	
 	private void checkMove(String boardStr, Cell expectedMove) {
 		Board board = new Board(boardStr);
 		AI ai = new AI();

@@ -43,6 +43,9 @@ public class AI {
 				}
 			}
 		}
+		if (emptyCells.isEmpty()) {
+			return new NullCell();
+		}
 		Random random = new Random();
 		return emptyCells.get(random.nextInt(emptyCells.size()));
 	}

@@ -23,7 +23,10 @@ public class GameOverMessage {
 		if (!gameManager.isGameOver()) {
 			return;
 		}
-		String str = gameManager.getWinnerMark().toString() + " Wins!";
+		String str = "Draw!";
+		if (!gameManager.isDraw()) {
+			str = gameManager.getWinnerMark().toString() + " Wins!";
+		}
 		g.drawString(str, x, y);
 	}
 

@@ -194,4 +194,18 @@ public class Board extends Observable {
 		return result;
 	}
 
+	public boolean isDraw() {
+		if (isWin()) {
+			return false;
+		}
+		for (int row = 0; row < BOARD_SIZE; ++row) {
+			for (int col = 0; col < BOARD_SIZE; ++col) {
+				if (getMarkInCell(row, col) == Mark.Empty) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 }

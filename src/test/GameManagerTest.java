@@ -19,9 +19,18 @@ public class GameManagerTest {
 	}
 
 	@Test
-	public void isGameOver_True() {
+	public void isGameOver_Win() {
 		Board boardMock = mock(Board.class);
 		when(boardMock.isWin()).thenReturn(true);
+		
+		GameManager gameManager = new GameManager(boardMock);
+		assertTrue(gameManager.isGameOver());
+	}
+	
+	@Test
+	public void isGameOver_Draw() {
+		Board boardMock = mock(Board.class);
+		when(boardMock.isDraw()).thenReturn(true);
 		
 		GameManager gameManager = new GameManager(boardMock);
 		assertTrue(gameManager.isGameOver());

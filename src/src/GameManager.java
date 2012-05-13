@@ -32,7 +32,7 @@ public class GameManager {
 	}
 
 	public boolean isGameOver() {
-		return board.isWin();
+		return board.isWin() || board.isDraw();
 	}
 
 	public Mark getWinnerMark() {
@@ -52,6 +52,10 @@ public class GameManager {
 		switchCurrentPlayer();
 		board.setMarkInCell(getCurrentPlayerMark(), ai.getMoveCell());
 		switchCurrentPlayer();
+	}
+
+	public boolean isDraw() {
+		return board.isDraw();
 	}
 
 }

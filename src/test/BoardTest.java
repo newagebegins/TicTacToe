@@ -262,4 +262,15 @@ public class BoardTest {
 		assertEquals(Mark.Empty, board.getMarkInCell(2, 2));
 	}
 	
+	@Test
+	public void isDraw() {
+		Board board = new Board(
+				"XXO\n" +
+				"OXX\n" +
+				"XOO\n"
+		);
+		
+		assertTrue(board.isDraw());
+	}
+	
 }
