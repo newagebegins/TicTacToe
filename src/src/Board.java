@@ -9,6 +9,7 @@ public class Board extends Observable {
 	private Mark[][] cells = new Mark[BOARD_SIZE][BOARD_SIZE];
 	private boolean win = false;
 	private Cell[] winCells = new Cell[BOARD_SIZE];
+	private Mark winnerMark = Mark.Null;
 	
 	public Board() {
 		initCells();
@@ -84,6 +85,7 @@ public class Board extends Observable {
 			if (allCellsHaveSamePlayerMarks(possibleWinCells[i])) {
 				setWin(true);
 				this.winCells = possibleWinCells[i];
+				this.winnerMark = getMarkInCell(possibleWinCells[i][0]);
 				return;
 			}
 		}
@@ -122,6 +124,10 @@ public class Board extends Observable {
 
 	public Cell[] getWinCells() {
 		return winCells;
+	}
+
+	public Mark getWinnerMark() {
+		return winnerMark;
 	}
 
 }

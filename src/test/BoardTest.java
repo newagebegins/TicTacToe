@@ -181,5 +181,23 @@ public class BoardTest {
 	public void settingMarkInNotLegitimateCellShouldNotThrowAnException() {
 		board.setMarkInCell(-1, 0, Mark.X);
 	}
+	
+	@Test
+	public void getWinnerMark_Win() {
+		final Mark WINNER_MARK = Mark.X;
+		
+		board.setMarkInCell(0, 0, WINNER_MARK);
+		board.setMarkInCell(0, 1, WINNER_MARK);
+		board.setMarkInCell(0, 2, WINNER_MARK);
+		board.checkWin();
+		
+		assertEquals(WINNER_MARK, board.getWinnerMark());
+	}
+	
+	@Test
+	public void getWinnerMark_NotWin() {
+		board.checkWin();
+		assertEquals(Mark.Null, board.getWinnerMark());
+	}
 
 }

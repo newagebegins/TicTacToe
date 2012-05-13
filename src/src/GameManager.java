@@ -39,4 +39,8 @@ public class GameManager implements Observer {
 		return board.isWin();
 	}
 
+	public Mark getWinnerMark() {
+		return board.getWinnerMark();
+	}
+
 }

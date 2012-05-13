@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import src.Board;
 import src.GameManager;
+import src.Mark;
 
 public class GameManagerTest {
 	
@@ -26,6 +27,16 @@ public class GameManagerTest {
 		
 		GameManager gameManager = new GameManager(boardMock);
 		assertTrue(gameManager.isGameOver());
+	}
+	
+	@Test
+	public void getWinnerMark() {
+		final Mark WINNER_MARK = Mark.X;
+		Board boardMock = mock(Board.class);
+		when(boardMock.getWinnerMark()).thenReturn(WINNER_MARK);
+		GameManager gameManager = new GameManager(boardMock);
+		
+		assertEquals(WINNER_MARK, gameManager.getWinnerMark());
 	}
 
 }
