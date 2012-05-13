@@ -169,5 +169,17 @@ public class BoardTest {
 		Cell[] expected = new Cell[] { new Cell(0, 2), new Cell(1, 1), new Cell(2, 0) };
 		assertArrayEquals(expected, board.getWinCells());
 	}
+	
+	@Test
+	public void getMarkCellWithWrongCoordsShouldReturnNullMark() {
+		assertEquals(Mark.Null, board.getMarkInCell(0, -1));
+		assertEquals(Mark.Null, board.getMarkInCell(-1, 0));
+		assertEquals(Mark.Null, board.getMarkInCell(-1, -1));
+	}
+	
+	@Test
+	public void settingMarkInNotLegitimateCellShouldNotThrowAnException() {
+		board.setMarkInCell(-1, 0, Mark.X);
+	}
 
 }

@@ -19,12 +19,16 @@ public class Board extends Observable {
 	}
 	
 	public void setMarkInCell(int row, int col, Mark mark) {
-		if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) {
+		if (!isLegitimateCell(row, col)) {
 			return;
 		}
 		cells[row][col] = mark;
 		setChanged();
 		notifyObservers();
+	}
+
+	private boolean isLegitimateCell(int row, int col) {
+		return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
 	}
 	
 	public void setXMarkInCell(int row, int col) {
@@ -40,7 +44,14 @@ public class Board extends Observable {
 	}
 	
 	public Mark getMarkInCell(int row, int col) {
+		if (!isLegitimateCell(row, col)) {
+			return Mark.Null;
+		}
 		return cells[row][col];
+	}
+	
+	public Mark getMarkInCell(Cell cell) {
+		return getMarkInCell(cell.getRow(), cell.getCol());
 	}
 	
 	public boolean cellIsNotEmpty(Cell cell) {
@@ -48,33 +59,47 @@ public class Board extends Observable {
 	}
 	
 	public boolean cellIsNotEmpty(int row, int col) {
-		return getMarkInCell(row, col) != Mark.Empty;
+		return !cellIsEmpty(row, col);
+	}
+	
+	public boolean cellIsEmpty(int row, int col) {
+		return getMarkInCell(row, col) == Mark.Empty && getMarkInCell(row, col) != Mark.Null;
 	}
 	
 	public void checkWin() {
-		for (int row = 0; row < BOARD_SIZE; ++row) {
-			if (allMarksAreTheSameAndNotEmptyInRow(row)) {
+		Cell[][] possibleWinCells = new Cell[][] {
+				{new Cell(0,0), new Cell(0,1), new Cell(0,2)},
+				{new Cell(1,0), new Cell(1,1), new Cell(1,2)},
+				{new Cell(2,0), new Cell(2,1), new Cell(2,2)},
+				
+				{new Cell(0,0), new Cell(1,0), new Cell(2,0)},
+				{new Cell(0,1), new Cell(1,1), new Cell(2,1)},
+				{new Cell(0,2), new Cell(1,2), new Cell(2,2)},
+				
+				{new Cell(0,0), new Cell(1,1), new Cell(2,2)},
+				{new Cell(0,2), new Cell(1,1), new Cell(2,0)},
+		};
+		
+		for (int i = 0; i < possibleWinCells.length; ++i) {
+			if (allCellsHaveSamePlayerMarks(possibleWinCells[i])) {
 				setWin(true);
+				this.winCells = possibleWinCells[i];
 				return;
 			}
 		}
-		
-		for (int col = 0; col < BOARD_SIZE; ++col) {
-			if (allMarksAreTheSameAndNotEmptyInCol(col)) {
-				setWin(true);
-				return;
+	}
+	
+	private boolean allCellsHaveSamePlayerMarks(Cell[] cellsArg) {
+		Mark firstMark = getMarkInCell(cellsArg[0]);
+		if (firstMark != Mark.O && firstMark != Mark.X) {
+			return false;
+		}
+		for (int i = 1; i < cellsArg.length; ++i) {
+			if (getMarkInCell(cellsArg[i]) != firstMark) {
+				return false;
 			}
 		}
-		
-		if (allMarksOnDiagonalOneAreTheSameAndNotEmpty()) {
-			setWin(true);
-			return;
-		}
-		
-		if (allMarksOnDiagonalTwoAreTheSameAndNotEmpty()) {
-			setWin(true);
-			return;
-		}
+		return true;
 	}
 	
 	public boolean isWin() {
@@ -93,74 +118,6 @@ public class Board extends Observable {
 		this.win = win;
 		setChanged();
 		notifyObservers();
-	}
-
-	private boolean allMarksAreTheSameAndNotEmptyInRow(int row) {
-		Mark firstMark = cells[row][0];
-		if (firstMark == Mark.Empty) {
-			return false;
-		}
-		Cell[] winCells = new Cell[BOARD_SIZE];
-		winCells[0] = new Cell(row, 0);
-		for (int col = 1; col < BOARD_SIZE; ++col) {
-			if (cells[row][col] != firstMark) {
-				return false;
-			}
-			winCells[col] = new Cell(row, col);
-		}
-		this.winCells = winCells;
-		return true;
-	}
-	
-	private boolean allMarksAreTheSameAndNotEmptyInCol(int col) {
-		Mark firstMark = cells[0][col];
-		if (firstMark == Mark.Empty) {
-			return false;
-		}
-		Cell[] winCells = new Cell[BOARD_SIZE];
-		winCells[0] = new Cell(0, col);
-		for (int row = 1; row < BOARD_SIZE; ++row) {
-			if (cells[row][col] != firstMark) {
-				return false;
-			}
-			winCells[row] = new Cell(row, col);
-		}
-		this.winCells = winCells;
-		return true;
-	}
-	
-	private boolean allMarksOnDiagonalOneAreTheSameAndNotEmpty() {
-		Mark firstMark = cells[0][0];
-		if (firstMark == Mark.Empty) {
-			return false;
-		}
-		Cell[] winCells = new Cell[BOARD_SIZE];
-		winCells[0] = new Cell(0, 0);
-		for (int i = 1; i < BOARD_SIZE; ++i) {
-			if (cells[i][i] != firstMark) {
-				return false;
-			}
-			winCells[i] = new Cell(i, i);
-		}
-		this.winCells = winCells;
-		return true;
-	}
-	
-	private boolean allMarksOnDiagonalTwoAreTheSameAndNotEmpty() {
-		Mark firstMark = cells[0][BOARD_SIZE - 1];
-		if (firstMark == Mark.Empty) {
-			return false;
-		}
-		Cell[] winCells = new Cell[BOARD_SIZE];
-		winCells[0] = new Cell(0, BOARD_SIZE - 1);
-		for (int row = 1, col = BOARD_SIZE - 2; col >= 0; ++row, --col) {
-			if (cells[row][col] != firstMark) {
-				return false;
-			}
-			winCells[row] = new Cell(row, col);
-		}
-		this.winCells = winCells;
-		return true;
 	}
 
 	public Cell[] getWinCells() {
