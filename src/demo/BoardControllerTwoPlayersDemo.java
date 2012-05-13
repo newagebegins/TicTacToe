@@ -28,7 +28,7 @@ public class BoardControllerTwoPlayersDemo extends Applet implements Observer {
 		boardController.setBoard(board);
 		boardController.setGameManager(gameManager);
 		
-		boardView = new BoardView();
+		boardView = new BoardView(this);
 		boardView.setBoard(board);
 		boardController.setBoardView(boardView);
 		

@@ -37,8 +37,8 @@ public class BoardController {
 			return new NullCell();
 		}
 		
-		int row = (point.y - boardView.getY()) / BoardView.CELL_SIZE_PX;
-		int col = (point.x - boardView.getX()) / BoardView.CELL_SIZE_PX;
+		int row = (point.y - boardView.getY()) / BoardView.CELL_HEIGHT;
+		int col = (point.x - boardView.getX()) / BoardView.CELL_WIDTH;
 		
 		return new Cell(row, col);
 	}

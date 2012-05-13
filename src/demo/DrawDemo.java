@@ -39,7 +39,7 @@ public class DrawDemo extends Applet implements Observer {
 		boardController.setBoard(board);
 		boardController.setGameManager(gameManager);
 		
-		boardView = new BoardView();
+		boardView = new BoardView(this);
 		boardView.setBoard(board);
 		boardView.setXY(50, 50);
 		boardController.setBoardView(boardView);

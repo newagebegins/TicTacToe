@@ -25,7 +25,7 @@ public class BoardViewWinDemo extends Applet {
 		board.setXMarkInCell(0, 2);
 		board.checkWin();
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
 		boardView.setXY(0, 0);
 		
@@ -40,7 +40,7 @@ public class BoardViewWinDemo extends Applet {
 		board.setXMarkInCell(2, 0);
 		board.checkWin();
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
 		boardView.setXY(100, 0);
 		
@@ -55,7 +55,7 @@ public class BoardViewWinDemo extends Applet {
 		board.setXMarkInCell(2, 2);
 		board.checkWin();
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
 		boardView.setXY(0, 100);
 		
@@ -70,7 +70,7 @@ public class BoardViewWinDemo extends Applet {
 		board.setXMarkInCell(2, 0);
 		board.checkWin();
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
 		boardView.setXY(100, 100);
 		

@@ -1,16 +1,25 @@
 package src;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.applet.Applet;
+import java.awt.*;
 
 public class BoardView {
 	
-	public static final int BOARD_SIZE_PX = 90;
-	public static final int CELL_SIZE_PX = BOARD_SIZE_PX / Board.BOARD_SIZE;
+	public static final int BOARD_WIDTH = 347;
+	public static final int BOARD_HEIGHT = 301;
+	public static final int CELL_WIDTH = BOARD_WIDTH / Board.BOARD_SIZE;
+	public static final int CELL_HEIGHT = BOARD_HEIGHT / Board.BOARD_SIZE;
 	
+	private Applet applet;
+	private Image boardImg;
 	private Board board = new NullBoard();
 	private int x = 0;
 	private int y = 0;
+	
+	public BoardView(Applet applet) {
+		this.applet = applet;
+		boardImg = applet.getImage(applet.getDocumentBase(), "images/board.png");
+	}
 	
 	public void paint(Graphics g) {
 		paintBoard(g);
@@ -21,7 +30,7 @@ public class BoardView {
 	}
 	
 	public Rectangle getRect() {
-		return new Rectangle(x, y, BOARD_SIZE_PX, BOARD_SIZE_PX);
+		return new Rectangle(x, y, BOARD_WIDTH, BOARD_HEIGHT);
 	}
 
 	public void setBoard(Board board) {
@@ -29,11 +38,7 @@ public class BoardView {
 	}
 	
 	private void paintBoard(Graphics g) {
-		g.drawRect(x, y, BOARD_SIZE_PX, BOARD_SIZE_PX);
-		g.drawLine(x, y + CELL_SIZE_PX, x + BOARD_SIZE_PX, y + CELL_SIZE_PX);
-		g.drawLine(x, y + CELL_SIZE_PX*2, x + BOARD_SIZE_PX, y + CELL_SIZE_PX*2);
-		g.drawLine(x + CELL_SIZE_PX, y, x + CELL_SIZE_PX, y + BOARD_SIZE_PX);
-		g.drawLine(x + CELL_SIZE_PX*2, y, x + CELL_SIZE_PX*2, y + BOARD_SIZE_PX);
+		g.drawImage(boardImg, x, y, applet);
 	}
 	
 	private void paintMarks(Graphics g) {
@@ -49,8 +54,8 @@ public class BoardView {
 	private void paintMarkInCell(Graphics g, int row, int col) {
 		Mark mark = board.getMarkInCell(row, col);
 		String markString = mark == Mark.X ? "X" : "O";
-		int x = this.x + 11 + col * CELL_SIZE_PX;
-		int y = this.y + 20 + row * CELL_SIZE_PX;
+		int x = this.x + 11 + col * CELL_WIDTH;
+		int y = this.y + 20 + row * CELL_HEIGHT;
 		g.drawString(markString, x, y);
 	}
 	
@@ -61,8 +66,8 @@ public class BoardView {
 		Cell[] winCells = board.getWinCells();
 		
 		for (int i = 0; i < winCells.length; ++i) {
-			winX[i] = x + winCells[i].getCol() * CELL_SIZE_PX + 15;
-			winY[i] = y + winCells[i].getRow() * CELL_SIZE_PX + 15;
+			winX[i] = x + winCells[i].getCol() * CELL_WIDTH + 15;
+			winY[i] = y + winCells[i].getRow() * CELL_HEIGHT + 15;
 		}
 		
 		g.drawPolyline(winX, winY, Board.BOARD_SIZE);

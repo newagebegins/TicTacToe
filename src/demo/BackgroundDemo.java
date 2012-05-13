@@ -11,7 +11,7 @@ public class BackgroundDemo extends Applet {
 	@Override
 	public void paint(Graphics g) {
 		Background bg = new Background(this);
-		setSize(bg.getDimension());
+		setSize(Background.WIDTH, Background.HEIGHT);
 		bg.paint(g);
 	}
 

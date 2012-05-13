@@ -1,6 +1,7 @@
 package demo;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 
 import src.BoardView;
@@ -10,7 +11,9 @@ public class BoardViewEmptyDemo extends Applet {
 
 	@Override
 	public void paint(Graphics g) {
-		BoardView boardView = new BoardView();
+		setBackground(Color.black);
+		BoardView boardView = new BoardView(this);
+		setSize(BoardView.BOARD_WIDTH, BoardView.BOARD_HEIGHT);
 		boardView.paint(g);
 	}
 

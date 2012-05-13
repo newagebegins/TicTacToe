@@ -1,11 +1,13 @@
 package src;
 
 import java.applet.Applet;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
 public class Background {
+	
+	public static final int WIDTH = 548;
+	public static final int HEIGHT = 472;
 
 	private Applet applet;
 	private Image image;
@@ -13,10 +15,6 @@ public class Background {
 	public Background(Applet applet) {
 		this.applet = applet;
 		image = applet.getImage(applet.getDocumentBase(), "images/bg.jpg");
-	}
-	
-	public Dimension getDimension() {
-		return new Dimension(image.getWidth(applet), image.getHeight(applet));
 	}
 	
 	public void paint(Graphics g) {

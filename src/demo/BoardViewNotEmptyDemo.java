@@ -18,7 +18,7 @@ public class BoardViewNotEmptyDemo extends Applet {
 		board.setXMarkInCell(0, 2);
 		board.setOMarkInCell(1, 0);
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
 		
 		boardView.paint(g);
