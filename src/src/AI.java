@@ -14,24 +14,44 @@ public class AI {
 	}
 
 	public Cell getMoveCell() {
+		Cell result = null;
+		
+		result = getSpecialMoveCell(aiMark);
+		if (result != null) {
+			return result;
+		}
+		
+		result = getSpecialMoveCell(getUserMark());
+		if (result != null) {
+			return result;
+		}
+		
+		return null;
+	}
+	
+	private Mark getUserMark() {
+		return aiMark == Mark.X ? Mark.O : Mark.X;
+	}
+
+	private Cell getSpecialMoveCell(Mark mark) {
 		for (int row = 0; row < Board.BOARD_SIZE; ++row) {
-			if (rowHasEmptyCell(board.getRow(row)) && rowHasTwoIdenticalMarks(board.getRow(row), aiMark)) {
+			if (rowHasEmptyCell(board.getRow(row)) && rowHasTwoIdenticalMarks(board.getRow(row), mark)) {
 				return new Cell(row, getIndexOfEmptyCellInRow(board.getRow(row)));
 			}
 		}
 		
 		for (int col = 0; col < Board.BOARD_SIZE; ++col) {
-			if (rowHasEmptyCell(board.getCol(col)) && rowHasTwoIdenticalMarks(board.getCol(col), aiMark)) {
+			if (rowHasEmptyCell(board.getCol(col)) && rowHasTwoIdenticalMarks(board.getCol(col), mark)) {
 				return new Cell(getIndexOfEmptyCellInRow(board.getCol(col)), col);
 			}
 		}
 		
-		if (rowHasEmptyCell(board.getDiagonalOne()) && rowHasTwoIdenticalMarks(board.getDiagonalOne(), aiMark)) {
+		if (rowHasEmptyCell(board.getDiagonalOne()) && rowHasTwoIdenticalMarks(board.getDiagonalOne(), mark)) {
 			int index = getIndexOfEmptyCellInRow(board.getDiagonalOne());
 			return new Cell(index, index);
 		}
 		
-		if (rowHasEmptyCell(board.getDiagonalTwo()) && rowHasTwoIdenticalMarks(board.getDiagonalTwo(), aiMark)) {
+		if (rowHasEmptyCell(board.getDiagonalTwo()) && rowHasTwoIdenticalMarks(board.getDiagonalTwo(), mark)) {
 			int index = getIndexOfEmptyCellInRow(board.getDiagonalTwo());
 			return new Cell(index, Board.BOARD_SIZE - 1 - index);
 		}

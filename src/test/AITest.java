@@ -92,6 +92,20 @@ public class AITest {
 					"O..\n", new Cell(0, 2));
 	}
 	
+	@Test
+	public void blockingMove_Horizontal() {
+		checkMove(	"XX.\n" +
+					"...\n" +
+					"...\n", new Cell(0, 2));
+	}
+	
+	@Test
+	public void blockingMove_Vertical() {
+		checkMove(	"X..\n" +
+					"...\n" +
+					"X..\n", new Cell(1, 0));
+	}
+	
 	private void checkMove(String boardStr, Cell expectedMove) {
 		Board board = new Board(boardStr);
 		AI ai = new AI();
