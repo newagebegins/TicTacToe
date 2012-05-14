@@ -20,10 +20,10 @@ public class GameOverMessage {
 		this.gameManager = gameManager;
 		this.x = 0;
 		this.y = 0;
-		winsImg = applet.getImage(applet.getDocumentBase(), "../images/wins.png");
-		oImg = applet.getImage(applet.getDocumentBase(), "../images/o.png");
-		xImg = applet.getImage(applet.getDocumentBase(), "../images/x.png");
-		drawImg = applet.getImage(applet.getDocumentBase(), "../images/draw.png");
+		winsImg = applet.getImage(getClass().getResource("images/wins.png"));
+		oImg = applet.getImage(getClass().getResource("images/o.png"));
+		xImg = applet.getImage(getClass().getResource("images/x.png"));
+		drawImg = applet.getImage(getClass().getResource("images/draw.png"));
 	}
 	
 	public void setXY(int x, int y) {

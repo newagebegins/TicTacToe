@@ -1,1 +1,5 @@
-/bin/
+/bin/java.policy.applet
+/bin/demo/
+/bin/test/
+/bin/src/*
+!/bin/src/images
