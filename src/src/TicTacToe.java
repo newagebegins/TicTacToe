@@ -1,6 +1,7 @@
 package src;
 import java.applet.Applet;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,11 +16,16 @@ public class TicTacToe extends Applet implements Observer {
 	private GameOverMessage gameOverMessage;
 	private AI ai;
 	private Background background;
+	private Image backbuffer;
+	private Graphics backg;
 	
 	@Override
 	public void init() {
 		background = new Background(this);
 		setSize(Background.WIDTH, Background.HEIGHT);
+		
+		backbuffer = createImage(Background.WIDTH, Background.HEIGHT);
+		backg = backbuffer.getGraphics();
 		
 		board = new Board();
 		board.addObserver(this);
@@ -51,13 +57,20 @@ public class TicTacToe extends Applet implements Observer {
 	
 	@Override
 	public void paint(Graphics g) {
-		background.paint(g);
-		boardView.paint(g);
-		gameOverMessage.paint(g);
+		update(g);
+	}
+	
+	@Override
+	public void update(Graphics g) {
+		background.paint(backg);
+		boardView.paint(backg);
+		gameOverMessage.paint(backg);
+		g.drawImage(backbuffer, 0, 0, this);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
+	
 }
