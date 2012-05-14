@@ -10,6 +10,9 @@ public class GameOverMessageNotInteractiveDemo extends Applet {
 
 	@Override
 	public void paint(Graphics g) {
+		Background bg = new Background(this);
+		setSize(Background.WIDTH, Background.HEIGHT);
+		
 		Board board = new Board();
 		final Mark WINNER_MARK = Mark.X;
 		board.setMarkInCell(0, 0, WINNER_MARK);
@@ -18,9 +21,10 @@ public class GameOverMessageNotInteractiveDemo extends Applet {
 		board.checkWin();
 		
 		GameManager gameManager = new GameManager(board);
-		GameOverMessage gameOverMessage = new GameOverMessage(gameManager);
-		gameOverMessage.setXY(50, 50);
+		GameOverMessage gameOverMessage = new GameOverMessage(this, gameManager);
+		gameOverMessage.setXY(130, 10);
 		
+		bg.paint(g);
 		gameOverMessage.paint(g);
 	}
 

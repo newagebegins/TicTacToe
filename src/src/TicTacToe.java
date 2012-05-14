@@ -38,7 +38,7 @@ public class TicTacToe extends Applet implements Observer {
 		boardView.setXY(50, 50);
 		boardController.setBoardView(boardView);
 		
-		gameOverMessage = new GameOverMessage(gameManager);
+		gameOverMessage = new GameOverMessage(this, gameManager);
 		gameOverMessage.setXY(75, 30);
 		
 		mouseController = new MouseController(gameManager, boardController);

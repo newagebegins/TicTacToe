@@ -1,17 +1,29 @@
 package src;
 
+import java.applet.Applet;
 import java.awt.Graphics;
+import java.awt.Image;
 
 public class GameOverMessage {
 
+	private Applet applet;
 	private GameManager gameManager;
 	private int x;
 	private int y;
+	private Image winsImg;
+	private Image oImg;
+	private Image xImg;
+	private Image drawImg;
 
-	public GameOverMessage(GameManager gameManager) {
+	public GameOverMessage(Applet applet, GameManager gameManager) {
+		this.applet = applet;
 		this.gameManager = gameManager;
 		this.x = 0;
 		this.y = 0;
+		winsImg = applet.getImage(applet.getDocumentBase(), "../images/wins.png");
+		oImg = applet.getImage(applet.getDocumentBase(), "../images/o.png");
+		xImg = applet.getImage(applet.getDocumentBase(), "../images/x.png");
+		drawImg = applet.getImage(applet.getDocumentBase(), "../images/draw.png");
 	}
 	
 	public void setXY(int x, int y) {
@@ -23,11 +35,18 @@ public class GameOverMessage {
 		if (!gameManager.isGameOver()) {
 			return;
 		}
-		String str = "Draw!";
-		if (!gameManager.isDraw()) {
-			str = gameManager.getWinnerMark().toString() + " Wins!";
+		
+		if (gameManager.isDraw()) {
+			g.drawImage(drawImg, x, y, applet);
 		}
-		g.drawString(str, x, y);
+		else {
+			Image markImg = xImg;
+			if (gameManager.getWinnerMark() == Mark.O) {
+				markImg = oImg;
+			}
+			g.drawImage(markImg, x, y+20, applet);
+			g.drawImage(winsImg, x+85, y, applet);
+		}
 	}
 
 }

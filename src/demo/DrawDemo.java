@@ -16,9 +16,13 @@ public class DrawDemo extends Applet implements Observer {
 	private MouseController mouseController;
 	private GameOverMessage gameOverMessage;
 	private AI ai;
+	private Background bg;
 	
 	@Override
 	public void init() {
+		bg = new Background(this);
+		setSize(Background.WIDTH, Background.HEIGHT);
+		
 		board = new Board(
 				"XXO\n" +
 				"OXX\n" +
@@ -41,11 +45,11 @@ public class DrawDemo extends Applet implements Observer {
 		
 		boardView = new BoardView(this);
 		boardView.setBoard(board);
-		boardView.setXY(50, 50);
+		boardView.setXY(100, 100);
 		boardController.setBoardView(boardView);
 		
-		gameOverMessage = new GameOverMessage(gameManager);
-		gameOverMessage.setXY(75, 30);
+		gameOverMessage = new GameOverMessage(this, gameManager);
+		gameOverMessage.setXY(130, 10);
 		
 		mouseController = new MouseController(gameManager, boardController);
 		addMouseListener(mouseController);
@@ -53,6 +57,7 @@ public class DrawDemo extends Applet implements Observer {
 	
 	@Override
 	public void paint(Graphics g) {
+		bg.paint(g);
 		boardView.paint(g);
 		gameOverMessage.paint(g);
 	}
