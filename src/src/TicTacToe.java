@@ -14,9 +14,13 @@ public class TicTacToe extends Applet implements Observer {
 	private MouseController mouseController;
 	private GameOverMessage gameOverMessage;
 	private AI ai;
+	private Background background;
 	
 	@Override
 	public void init() {
+		background = new Background(this);
+		setSize(Background.WIDTH, Background.HEIGHT);
+		
 		board = new Board();
 		board.addObserver(this);
 		
@@ -35,11 +39,11 @@ public class TicTacToe extends Applet implements Observer {
 		
 		boardView = new BoardView(this);
 		boardView.setBoard(board);
-		boardView.setXY(50, 50);
+		boardView.setXY(100, 100);
 		boardController.setBoardView(boardView);
 		
 		gameOverMessage = new GameOverMessage(this, gameManager);
-		gameOverMessage.setXY(75, 30);
+		gameOverMessage.setXY(130, 10);
 		
 		mouseController = new MouseController(gameManager, boardController);
 		addMouseListener(mouseController);
@@ -47,6 +51,7 @@ public class TicTacToe extends Applet implements Observer {
 	
 	@Override
 	public void paint(Graphics g) {
+		background.paint(g);
 		boardView.paint(g);
 		gameOverMessage.paint(g);
 	}
