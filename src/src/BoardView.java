@@ -14,6 +14,10 @@ public class BoardView {
 	private Image boardImg;
 	private Image xImg;
 	private Image oImg;
+	private Image lineHorizontalImg;
+	private Image lineVerticalImg;
+	private Image lineDiagonalOneImg;
+	private Image lineDiagonalTwoImg;
 	private Board board = new NullBoard();
 	private int x = 0;
 	private int y = 0;
@@ -23,6 +27,10 @@ public class BoardView {
 		boardImg = applet.getImage(applet.getDocumentBase(), "images/board.png");
 		xImg = applet.getImage(applet.getDocumentBase(), "images/x.png");
 		oImg = applet.getImage(applet.getDocumentBase(), "images/o.png");
+		lineHorizontalImg = applet.getImage(applet.getDocumentBase(), "images/line-horizontal.png");
+		lineVerticalImg = applet.getImage(applet.getDocumentBase(), "images/line-vertical.png");
+		lineDiagonalOneImg = applet.getImage(applet.getDocumentBase(), "images/line-diagonal-one.png");
+		lineDiagonalTwoImg = applet.getImage(applet.getDocumentBase(), "images/line-diagonal-two.png");
 	}
 	
 	public void paint(Graphics g) {
@@ -64,17 +72,33 @@ public class BoardView {
 	}
 	
 	private void crossOutWinCells(Graphics g) {
-		int[] winX = new int[Board.BOARD_SIZE];
-		int[] winY = new int[Board.BOARD_SIZE];
-		
 		Cell[] winCells = board.getWinCells();
 		
-		for (int i = 0; i < winCells.length; ++i) {
-			winX[i] = x + winCells[i].getCol() * CELL_WIDTH + 15;
-			winY[i] = y + winCells[i].getRow() * CELL_HEIGHT + 15;
+		// Horizontal.
+		if (winCells[0].getRow() == winCells[Board.BOARD_SIZE - 1].getRow()) {
+			int winX = x + winCells[0].getCol() * CELL_WIDTH - 10;
+			int winY = y + winCells[0].getRow() * CELL_HEIGHT + CELL_HEIGHT / 2 - 10;
+			g.drawImage(lineHorizontalImg, winX, winY, applet);
+		}
+		// Vertical.
+		else if (winCells[0].getCol() == winCells[Board.BOARD_SIZE - 1].getCol()) {
+			int winX = x + winCells[0].getCol() * CELL_WIDTH + CELL_WIDTH / 2 - 10;
+			int winY = y + winCells[0].getRow() * CELL_HEIGHT - 25;
+			g.drawImage(lineVerticalImg, winX, winY, applet);
+		}
+		// Diagonal one.
+		else if (winCells[0].getCol() == 0 && winCells[Board.BOARD_SIZE - 1].getCol() == 2) {
+			int winX = x + 25;
+			int winY = y;
+			g.drawImage(lineDiagonalOneImg, winX, winY, applet);
+		}
+		// Diagonal two.
+		else if (winCells[0].getCol() == 2 && winCells[Board.BOARD_SIZE - 1].getCol() == 0) {
+			int winX = x + 40;
+			int winY = y;
+			g.drawImage(lineDiagonalTwoImg, winX, winY, applet);
 		}
 		
-		g.drawPolyline(winX, winY, Board.BOARD_SIZE);
 	}
 
 	public void setXY(int x, int y) {

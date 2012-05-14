@@ -1,6 +1,7 @@
 package demo;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 
 import src.Board;
@@ -11,6 +12,9 @@ public class BoardViewWinDemo extends Applet {
 
 	@Override
 	public void paint(Graphics g) {
+		setBackground(Color.black);
+		setSize(BoardView.BOARD_WIDTH * 2, BoardView.BOARD_HEIGHT * 2);
+		
 		topRow(g);
 		leftCol(g);
 		diagonalOne(g);
@@ -42,7 +46,7 @@ public class BoardViewWinDemo extends Applet {
 		
 		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
-		boardView.setXY(100, 0);
+		boardView.setXY(BoardView.BOARD_WIDTH, 0);
 		
 		boardView.paint(g);
 	}
@@ -57,7 +61,7 @@ public class BoardViewWinDemo extends Applet {
 		
 		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
-		boardView.setXY(0, 100);
+		boardView.setXY(0, BoardView.BOARD_HEIGHT);
 		
 		boardView.paint(g);
 	}
@@ -72,7 +76,7 @@ public class BoardViewWinDemo extends Applet {
 		
 		BoardView boardView = new BoardView(this);
 		boardView.setBoard(board);
-		boardView.setXY(100, 100);
+		boardView.setXY(BoardView.BOARD_WIDTH, BoardView.BOARD_HEIGHT);
 		
 		boardView.paint(g);
 	}
