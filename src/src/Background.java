@@ -14,7 +14,7 @@ public class Background {
 	
 	public Background(Applet applet) {
 		this.applet = applet;
-		image = applet.getImage(applet.getDocumentBase(), "images/bg.jpg");
+		image = applet.getImage(applet.getDocumentBase(), "../images/bg.jpg");
 	}
 	
 	public void paint(Graphics g) {

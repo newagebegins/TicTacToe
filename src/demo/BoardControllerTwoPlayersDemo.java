@@ -1,6 +1,7 @@
 package demo;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,14 +16,23 @@ public class BoardControllerTwoPlayersDemo extends Applet implements Observer {
 	BoardController boardController;
 	GameManager gameManager;
 	MouseController mouseController;
+	AI ai;
 
 	@Override
 	public void init() {
+		setBackground(Color.black);
+		setSize(BoardView.BOARD_WIDTH, BoardView.BOARD_HEIGHT);
+		
 		board = new Board();
 		board.addObserver(this);
 		
 		gameManager = new GameManager(board);
 		gameManager.setCurrentPlayerMark(Mark.X);
+		
+		ai = new AI();
+		ai.setAIMark(Mark.O);
+		ai.setBoard(board);
+		gameManager.setAI(ai);
 		
 		boardController = new BoardController();
 		boardController.setBoard(board);

@@ -24,13 +24,13 @@ public class BoardView {
 	
 	public BoardView(Applet applet) {
 		this.applet = applet;
-		boardImg = applet.getImage(applet.getDocumentBase(), "images/board.png");
-		xImg = applet.getImage(applet.getDocumentBase(), "images/x.png");
-		oImg = applet.getImage(applet.getDocumentBase(), "images/o.png");
-		lineHorizontalImg = applet.getImage(applet.getDocumentBase(), "images/line-horizontal.png");
-		lineVerticalImg = applet.getImage(applet.getDocumentBase(), "images/line-vertical.png");
-		lineDiagonalOneImg = applet.getImage(applet.getDocumentBase(), "images/line-diagonal-one.png");
-		lineDiagonalTwoImg = applet.getImage(applet.getDocumentBase(), "images/line-diagonal-two.png");
+		boardImg = applet.getImage(applet.getDocumentBase(), "../images/board.png");
+		xImg = applet.getImage(applet.getDocumentBase(), "../images/x.png");
+		oImg = applet.getImage(applet.getDocumentBase(), "../images/o.png");
+		lineHorizontalImg = applet.getImage(applet.getDocumentBase(), "../images/line-horizontal.png");
+		lineVerticalImg = applet.getImage(applet.getDocumentBase(), "../images/line-vertical.png");
+		lineDiagonalOneImg = applet.getImage(applet.getDocumentBase(), "../images/line-diagonal-one.png");
+		lineDiagonalTwoImg = applet.getImage(applet.getDocumentBase(), "../images/line-diagonal-two.png");
 	}
 	
 	public void paint(Graphics g) {
