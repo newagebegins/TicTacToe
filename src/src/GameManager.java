@@ -4,7 +4,7 @@ public class GameManager {
 	
 	private Mark currentPlayerMark;
 	private Board board;
-	private AI ai;
+	private AI ai = new NullAI();
 
 	public GameManager(Board board) {
 		this.board = board;

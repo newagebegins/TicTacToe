@@ -1,6 +1,7 @@
 package demo;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,6 +19,9 @@ public class BoardControllerOnePlayerDemo extends Applet implements Observer {
 
 	@Override
 	public void init() {
+		setBackground(Color.black);
+		setSize(BoardView.BOARD_WIDTH, BoardView.BOARD_HEIGHT);
+		
 		board = new Board();
 		board.addObserver(this);
 		
